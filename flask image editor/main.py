@@ -49,13 +49,10 @@ def about():
 def edit():
     if request.method == "POST": 
         operation = request.form.get("operation")
-        # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return "error"
         file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
         if file.filename == '':
             flash('No selected file')
             return "error no selected file"
@@ -63,10 +60,8 @@ def edit():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             new = processImage(filename, operation)
-            flash(f"Your image has been processed and is available <a href='/{new}' target='_blank'>here</a>")
+            flash(f"Your image has been processed and is available <a href='\{new}' target='_blank'>here</a>")
             return render_template("index.html")
-
     return render_template("index.html")
-
 
 app.run(debug=True, port=5001)
