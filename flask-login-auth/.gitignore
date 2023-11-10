@@ -1,8 +1,5 @@
 venv
-.venv
 __pycache__
-.__pycache__
 .vscode
-website/__pycache__
 website/database.db
-pycache
+instance
