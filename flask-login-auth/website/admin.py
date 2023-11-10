@@ -1,10 +1,17 @@
+from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from .models import Note, User
+from .models import User, Note
+from .db import db
 
 admin = Admin()
+admin_bp = Blueprint('admin', __name__)
 
-def init_app(app, db):
-    admin.init_app(app)
+@admin_bp.route('/admin')
+@login_required
+def admin_home():
     admin.add_view(ModelView(User, db.session))
     admin.add_view(ModelView(Note, db.session))
+    return render_template('admin/admin_home.html', user=current_user)
+
