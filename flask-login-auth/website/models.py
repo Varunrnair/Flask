@@ -25,13 +25,3 @@ class PostView(ModelView):
     can_delete = False
     form_columns=['id', 'data', 'user']
     column_list = ['id', 'data', 'user']
-
-
-# create admin Class
-class Admin(db.Model):
-    id=db.Column(db.Integer, primary_key=True)
-    username=db.Column(db.String(255), nullable=False)
-    password=db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f'Admin("{self.username}","{self.id}")'
